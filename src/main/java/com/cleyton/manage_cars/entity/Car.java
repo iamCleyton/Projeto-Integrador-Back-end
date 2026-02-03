@@ -1,10 +1,7 @@
 package com.cleyton.manage_cars.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -33,10 +30,10 @@ public class Car implements Serializable {
     private String color;
 
     @Column(name = "year", nullable = false, length = 4)
-    private int year;
+    private Integer year;
 
-    @Column(name = "realase_date", nullable = false)
-    private LocalDateTime realaseDate;
+    @Column(name = "release_date", nullable = false)
+    private LocalDateTime releaseDate;
 
 
     @CreatedDate

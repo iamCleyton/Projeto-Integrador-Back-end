@@ -17,6 +17,6 @@ public class CarResponseDto {
     private String model;
     private String brand;
     private String color;
-    private String year;
-    private LocalDateTime realaseDate;
+    private Integer year;
+    private LocalDateTime releaseDate;
 }
