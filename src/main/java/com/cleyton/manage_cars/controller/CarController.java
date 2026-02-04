@@ -3,9 +3,11 @@ package com.cleyton.manage_cars.controller;
 
 import com.cleyton.manage_cars.dto.mapper.CarMapper;
 import com.cleyton.manage_cars.dto.request.CarCreateDto;
+import com.cleyton.manage_cars.dto.request.CarUpdateDto;
 import com.cleyton.manage_cars.dto.response.CarResponseDto;
 import com.cleyton.manage_cars.entity.Car;
 import com.cleyton.manage_cars.service.CarService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -25,7 +27,7 @@ public class CarController {
 
     @PostMapping
     public ResponseEntity<CarResponseDto> create(
-            @RequestBody CarCreateDto dto) {
+         @Valid @RequestBody CarCreateDto dto) {
         Car car = CarMapper.toCar(dto);
         Car savedCar = carService.save(car);
         CarResponseDto response = CarMapper.toDto(savedCar);
@@ -50,9 +52,9 @@ public class CarController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<CarResponseDto> PprtialUpdate(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
+    public ResponseEntity<CarResponseDto> PartialUpdate(@PathVariable Long id, @RequestBody @Valid CarUpdateDto dto) {
 
-        return ResponseEntity.ok(carService.partialUpdate(id, updates));
+        return ResponseEntity.ok(carService.partialUpdate(id, dto));
     }
 
 

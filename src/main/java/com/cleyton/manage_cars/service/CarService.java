@@ -1,10 +1,11 @@
 package com.cleyton.manage_cars.service;
 import com.cleyton.manage_cars.dto.mapper.CarMapper;
+import com.cleyton.manage_cars.dto.request.CarUpdateDto;
 import com.cleyton.manage_cars.dto.response.CarResponseDto;
 import com.cleyton.manage_cars.entity.Car;
+import com.cleyton.manage_cars.exception.EntityNotFoundException;
 import com.cleyton.manage_cars.repository.CarRepository;
 import com.cleyton.manage_cars.repository.CarSpecification;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
@@ -13,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.data.domain.Pageable;
 
-import java.time.LocalDate;
-import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
@@ -37,27 +36,39 @@ public class CarService {
     @Transactional(readOnly = true)
     public Car findbyid(Long id) {
     return carRepository.findById(id).orElseThrow(
-        () -> new EntityNotFoundException(String.format("Cliente id=%s não encontrado no sistema", id)));
+        () -> new EntityNotFoundException(String.format(String.format("Car id=%s not found in the system", id))));
     }
 
+
+    /*Busca o carro no banco pelo id na url
+    Depois Verifica:
+    Se o campo no dto não for nulo (não tiver vazio),
+    significa que o usuario enviou um valor em algum atributo,
+    Logo, esse valor é atualizado, mas se o valor for nulo,
+    não haverá mudança no valor não digitado.
+
+     */
     @Transactional
-    public CarResponseDto partialUpdate(Long id, Map<String, Object> updates) {
+    public CarResponseDto partialUpdate(Long id, CarUpdateDto dto) {
         Car car = findbyid(id);
 
-        if (updates.containsKey("brand")) {
-            car.setBrand((String) updates.get("brand"));
+        if (dto.getBrand() != null) {
+            car.setBrand(dto.getBrand());
         }
-        if (updates.containsKey("model")) {
-            car.setModel((String) updates.get("model"));
+        if (dto.getModel() != null) {
+            car.setModel(dto.getModel());
         }
-        if (updates.containsKey("color")) {
-            car.setColor((String) updates.get("color"));
+        if (dto.getColor() != null) {
+            car.setColor(dto.getColor());
         }
-        if (updates.containsKey("year")) {
-            car.setYear((Integer) updates.get("year"));
+        if (dto.getYear() != null) {
+            car.setYear(dto.getYear());
+        }
+        if (dto.getReleaseDate() != null) {
+            car.setReleaseDate(dto.getReleaseDate());
         }
 
-        return CarMapper.toDto(carRepository.save(car));
+        return new CarResponseDto(car);
     }
 
 

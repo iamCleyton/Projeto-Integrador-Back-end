@@ -35,7 +35,6 @@ public class Car implements Serializable {
     @Column(name = "release_date", nullable = false)
     private LocalDateTime releaseDate;
 
-
     @CreatedDate
     @Column(name = "date_create")
     private LocalDateTime dateCreate;
