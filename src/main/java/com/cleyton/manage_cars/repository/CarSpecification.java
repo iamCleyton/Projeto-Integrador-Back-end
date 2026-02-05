@@ -18,13 +18,13 @@ public class CarSpecification {
                 predicates.add(cb.like(cb.lower(root.get("brand")), "%" + brand.toLowerCase() + "%"));
             }
             if (model != null && !model.isEmpty()) {
-                predicates.add(cb.equal(cb.lower(root.get("modelo")), model.toLowerCase()));
+                predicates.add(cb.equal(cb.lower(root.get("model")), model.toLowerCase()));
             }
             if (year != null) {
                 predicates.add(cb.equal(root.get("year"), year));
             }
             if (color != null && !color.isEmpty()) {
-                predicates.add(cb.equal(cb.lower(root.get("cor")), color.toLowerCase()));
+                predicates.add(cb.equal(cb.lower(root.get("color")), color.toLowerCase()));
             }
             return cb.and(predicates.toArray(new Predicate[0]));
         };
