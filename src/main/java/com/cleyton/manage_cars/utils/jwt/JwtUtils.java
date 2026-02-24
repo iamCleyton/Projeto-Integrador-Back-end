@@ -13,7 +13,7 @@ public class JwtUtils {
     // chave secreta
     private final String SECRET_KEY = "0123456789-0123456789-0123456789";
 
-    private final long EXPIRATION_TIME = 600000;
+    private final long EXPIRATION_TIME = 86400000;;
 
     //converte a string da chave em um objeto chave
     private Key getSigningKey() {

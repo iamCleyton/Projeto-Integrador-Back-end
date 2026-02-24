@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDateTime;
+
 
 @RequiredArgsConstructor
 @Service
@@ -23,6 +25,8 @@ public class CarService {
 
     @Transactional
     public Car save(Car car) {
+
+        car.setReleaseDate(LocalDateTime.now());
         return carRepository.save(car);
     }
 

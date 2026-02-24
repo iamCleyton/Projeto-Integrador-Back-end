@@ -32,6 +32,6 @@ public class CarCreateDto {
     @Max(value = 2027, message = "The year must be before 2028")
     private Integer year;
 
-    @NotNull
+
     private LocalDateTime releaseDate;
 }

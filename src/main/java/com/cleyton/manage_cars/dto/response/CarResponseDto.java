@@ -20,6 +20,7 @@ public class CarResponseDto {
     private String color;
     private Integer year;
     private LocalDateTime releaseDate;
+    LocalDateTime dateCreate;
 
     public CarResponseDto(Car car) {
         this.id = car.getId();
@@ -28,5 +29,6 @@ public class CarResponseDto {
         this.color = car.getColor();
         this.year = car.getYear();
         this.releaseDate = car.getReleaseDate();
+        this.dateCreate = car.getDateCreate();
     }
 }
